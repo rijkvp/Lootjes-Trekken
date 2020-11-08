@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+        integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"
+        integrity="sha384-BOsAfwzjNJHrJ8cZidOg56tcQWfp6y72vEJ8xQ9w6Quywb24iOsW913URv1IS4GD"
+        crossorigin="anonymous"></script>
+    <title>Lootjes Trekken</title>
+    <script>
+        class Person {
+            constructor(name) {
+                this.name = name;
+            }
+        }
+        function updatePersonForm() {
+            var personList = document.getElementById("personList");
+            personList.innerHTML = ""; // Clear previous
+
+            var amount = document.getElementById("amountInput").value;
+
+            for (var i = 1; i <= amount; i++) {
+                var personElement = document.createElement("div");
+                personElement.className = "container";
+                personElement.innerHTML = '<div class="container personItem"><b>Persoon ' + i + '</b><br><label>Naam: </label><input class="personItemName" type="text"></div>';
+                personList.appendChild(personElement);
+            }
+        }
+
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var rand = Math.floor(Math.random() * (i + 1));
+                [array[i], array[rand]] = [array[rand], array[i]]
+            }
+        }
+
+        function execute() {
+            var persons = [];
+            document.querySelectorAll('.personItem').forEach(function (personItemElement) {
+                var name = personItemElement.querySelector('.personItemName').value;
+                persons.push(new Person(name));
+            });
+
+            shuffleArray(persons);
+
+            for (var i = 0; i < persons.length; i++) {
+                if (i == persons.length - 1)
+                    var selected = persons[0].name;
+                else
+                    var selected = persons[i + 1].name
+
+                persons[i].selected = selected;
+            }
+            console.log(persons);
+
+            var results = document.getElementById("results");
+            results.innerHTML = ""; // Clear resutls
+            var resultsTitle = document.createElement("h1");
+            resultsTitle.innerHTML = "Resultaten";
+            results.appendChild(resultsTitle);
+            persons.forEach(person => {
+                var resultElement = document.createElement("div");
+                resultElement.className = "container";
+                resultElement.innerHTML = "<b>" + person.name + "</b><br>Getrokken: " + person.selected;
+                results.appendChild(resultElement);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+
+        <div class="container">
+            <h1>Lootjes Trekken</h1>
+            <div class="container">
+                <label for="amount">Aantal personen: </label>
+                <input id="amountInput" type="number" min="3" value="3" name="amount">
+                <button onclick="updatePersonForm()">Update</button>
+            </div>
+            <h2>Personen</h2>
+            <p>Voer hier de namen in:</p>
+            <div id="personList" class="container"></div>
+            <button onclick="execute()">Trekken</button>
+            <div id="results" class="container"></div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            Made by <a href="https://github.com/rijkvp">Rijk van Putten</a>
+        </div>
+    </footer>
+</body>
+
+</html>
