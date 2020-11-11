@@ -20,8 +20,8 @@
     <main class="container">
 
         <div class="text-center p-5 m-4 shadow rounded">
-            <h1>Lootjes Trekken</h1>
-            <p class="lead">Trek eenvoudig lootjes zonder dat iemand zichzelf trekt.</p>
+            <h1 class="display-2">Lootjes Trekken</h1>
+            <p class="lead">Trek eenvoudig lootjes zonder dat iemand zichzelf trekt! En zorg ervoor dat je niet dezelfde mensen als vorgaande jaren trekt.</p>
             <hr class="my-5 mx-auto w-75 text-center">
             <div class="container my-5">
                 <div class="input-group w-50 mb-5 mx-auto">
@@ -30,8 +30,7 @@
                     <button class="btn btn-outline-primary" onclick="updatePersonForm()">Update</button>
                 </div>
                 <div id="personList" class="container w-50"></div>
-                <button class="btn btn-outline-primary text-left" onclick="execute()">Trek de lootjes!</button>
-
+                <button id="executeButton" class="btn btn-primary mt-5" onclick="execute()">Trek de lootjes</button>
             </div>
             <div id="personalResultsSection">
                 <hr class="my-5 mx-auto w-75 text-center">
@@ -40,16 +39,12 @@
                     <span class="input-group-text">Persoon</span>
                     <select id="personalResultsSelect" class="form-control form-select">
                         <option selected>Kies persoon</option>
-                        <option value="1">Piet</option>
-                        <option value="2">Jan</option>
-                        <option value="3">Henk</option>
                     </select>
                     <button class="btn btn-outline-primary" onclick="viewPersonalResult()">Bekijk</button>
                 </div>
                 <div id="personalResultsView" class="container my-5 w-50">
-                    <h3 class="display-6"><small class="text-muted">Je hebt </small><span
-                            id="personalResultsText">[NAAM HIER]</span><small
-                            class="text-muted"> getrokken!</small></h3>
+                    <h3 class="display-6"><small class="text-muted">Je hebt </small><span id="personalResultsText">[NAAM
+                            HIER]</span><small class="text-muted"> getrokken!</small></h3>
                     <p class="lead">Onthoud het goed of schijf het ergens op!</p>
                     <button class="btn btn-primary" onclick="hidePersonalResult()">Oke, verberg dit nu</button>
                 </div>
@@ -58,12 +53,13 @@
                 <hr class="my-5 mx-auto w-75 text-center">
                 <h2 class="mb-3">Alle Resultaten</h2>
                 <div id="allResultsConfirmation">
-                    <p>Als je alle resultaten bekijkt je de getrokken personen van iedereen zien! Meestal hoef je dit niet te gebruiken!</p>
+                    <p>Als je alle resultaten bekijkt dan kan je de getrokken personen van iedereen zien! Meestal hoef je dit niet te gebruiken!</p>
                     <button class="btn btn-danger" onclick="toggleAllResults(true)">Bekijk alle resultaten</button>
                 </div>
                 <div id="allResultsView">
                     <div id="allResultsContainer" class="container my-5 w-50"></div>
-                    <button class="btn btn-outline-secondary" onclick="toggleAllResults(false)">Verberg alle resultaten</button>
+                    <button class="btn btn-outline-secondary" onclick="toggleAllResults(false)">Verberg alle
+                        resultaten</button>
                 </div>
             </div>
         </div>
