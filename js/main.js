@@ -3,29 +3,34 @@ var persons = [];
 var allResultsSection;
 var allResultsContainer;
 var allResultsConfirmation;
+var allResultsView;
+
 var showingAllResults = false;
+
 var personalResultsSection;
 var personalResultsView;
 var personalResultsSelect;
 var personalResultsText;
 
 window.onload = (event) => {
-    updatePersonForm();
-    
     // Hide sections
     allResultsSection = document.getElementById("allResultsSection");
     allResultsSection.style.display = "none";
+    
     personalResultsSection = document.getElementById("personalResultsSection");
     personalResultsSection.style.display = "none";
-
+    
     allResultsConfirmation = document.getElementById("allResultsConfirmation");
     allResultsContainer = document.getElementById("allResultsContainer");
-    toggleAllResults(showingAllResults);
+    allResultsView = document.getElementById("allResultsView");
 
     personalResultsSelect = document.getElementById("personalResultsSelect");
     personalResultsView = document.getElementById("personalResultsView");
     personalResultsView.style.display = "none";
     personalResultsText = document.getElementById("personalResultsText");
+
+    
+    updatePersonForm();
 };
 
 class Person {
@@ -35,7 +40,23 @@ class Person {
     }
 }
 
+function clearResults()
+{
+    toggleAllResults(false);
+
+    allResultsSection.style.display = 'none';
+    personalResultsSection.style.display = 'none';
+    personalResultsView.style.display = "none";
+
+    // Clear previous resutls
+    allResultsContainer.innerHTML = "";
+    personalResultsSelect.innerHTML = '<option selected value="default">Kies een persoon</option>'; // Default option
+    personalResultsText.innerHTML = "[NAAM HIER]";
+}
+
 function updatePersonForm() {
+    clearResults();
+
     var personList = document.getElementById("personList");
     personList.innerHTML = ""; // Clear previous
 
@@ -84,16 +105,10 @@ function execute() {
 }
 
 function updateResults() {
-    toggleAllResults(false);
+    clearResults();
 
     allResultsSection.style.display = 'block';
     personalResultsSection.style.display = 'block';
-    personalResultsView.style.display = "none";
-
-    // Clear previous resutls
-    allResultsContainer.innerHTML = "";
-    personalResultsSelect.innerHTML = '<option selected value="default">Kies een persoon</option>'; // Default option
-    personalResultsText.innerHTML = "[NAAM HIER]";
 
     persons.forEach(person => {
         var resultElement = document.createElement("div");
@@ -130,12 +145,12 @@ function toggleAllResults(value)
     showingAllResults = value;
     if (showingAllResults)
     {
+        allResultsView.style.display = "block";
         allResultsConfirmation.style.display = "none";
-        allResultsContainer.style.display = "block";
     } 
     else
     {
-        allResultsContainer.style.display = "none";
+        allResultsView.style.display = "none";
         allResultsConfirmation.style.display = "block";
     }
 }

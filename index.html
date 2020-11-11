@@ -61,7 +61,10 @@
                     <p>Als je alle resultaten bekijkt je de getrokken personen van iedereen zien! Meestal hoef je dit niet te gebruiken!</p>
                     <button class="btn btn-danger" onclick="toggleAllResults(true)">Bekijk alle resultaten</button>
                 </div>
-                <div id="allResultsContainer" class="container my-5 w-50"></div>
+                <div id="allResultsView">
+                    <div id="allResultsContainer" class="container my-5 w-50"></div>
+                    <button class="btn btn-outline-secondary" onclick="toggleAllResults(false)">Verberg alle resultaten</button>
+                </div>
             </div>
         </div>
     </main>
