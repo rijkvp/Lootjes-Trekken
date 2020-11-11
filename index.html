@@ -24,7 +24,7 @@
             <p class="lead">Trek eenvoudig lootjes zonder dat iemand zichzelf trekt.</p>
             <hr class="my-5 mx-auto w-75 text-center">
             <div class="container my-5">
-                <div class="input-group center w-50 mb-5 mx-auto">
+                <div class="input-group w-50 mb-5 mx-auto">
                     <span class="input-group-text">Aantal mensen</span>
                     <input class="form-control" id="amountInput" type="number" min="3" value="3" name="amount">
                     <button class="btn btn-outline-primary" onclick="updatePersonForm()">Update</button>
@@ -33,19 +33,42 @@
                 <button class="btn btn-outline-primary text-left" onclick="execute()">Trek de lootjes!</button>
 
             </div>
-            <div id="resultsDiv" style="display: none;">
+            <div id="personalResultsSection">
                 <hr class="my-5 mx-auto w-75 text-center">
-                <div class="container my-5 w-50">
-                    <h2 class="mb-3">Resultaten</h2>
-                    <div id="results" class="container"></div>
+                <h2 class="mb-3">Persoonlijke Resultaten</h2>
+                <div class="input-group w-50 mb-5 mx-auto">
+                    <span class="input-group-text">Persoon</span>
+                    <select id="personalResultsSelect" class="form-control form-select">
+                        <option selected>Kies persoon</option>
+                        <option value="1">Piet</option>
+                        <option value="2">Jan</option>
+                        <option value="3">Henk</option>
+                    </select>
+                    <button class="btn btn-outline-primary" onclick="viewPersonalResult()">Bekijk</button>
                 </div>
+                <div id="personalResultsView" class="container my-5 w-50">
+                    <h3 class="display-6"><small class="text-muted">Je hebt </small><span
+                            id="personalResultsText">[NAAM HIER]</span><small
+                            class="text-muted"> getrokken!</small></h3>
+                    <p class="lead">Onthoud het goed of schijf het ergens op!</p>
+                    <button class="btn btn-primary" onclick="hidePersonalResult()">Oke, verberg dit nu</button>
+                </div>
+            </div>
+            <div id="allResultsSection">
+                <hr class="my-5 mx-auto w-75 text-center">
+                <h2 class="mb-3">Alle Resultaten</h2>
+                <div id="allResultsConfirmation">
+                    <p>Als je alle resultaten bekijkt je de getrokken personen van iedereen zien! Meestal hoef je dit niet te gebruiken!</p>
+                    <button class="btn btn-danger" onclick="toggleAllResults(true)">Bekijk alle resultaten</button>
+                </div>
+                <div id="allResultsContainer" class="container my-5 w-50"></div>
             </div>
         </div>
     </main>
     <footer class="container w-75 p-4 text-center">
         Made by <a href="https://github.com/rijkvp" class="link-dark">Rijk van Putten</a> ·
-        Lootjes Trekken · 
-        <a href="https://github.com/rijkvp/Lootjes-Trekken" class="link-dark">Source</a> · 
+        Lootjes Trekken ·
+        <a href="https://github.com/rijkvp/Lootjes-Trekken" class="link-dark">Source</a> ·
         <a href="https://github.com/rijkvp/Lootjes-Trekken/issues/new" class="link-dark">Submit issue</a>
     </footer>
 
