@@ -10,6 +10,9 @@ var allResultsView;
 var showingAllResults = false;
 var amountPeople;
 var validInput = false;
+var disapprovesPossible = false;
+
+var disapprovesWarning;
 
 var personalResultsSection;
 var personalResultsView;
@@ -31,6 +34,9 @@ window.onload = (event) => {
     allResultsContainer = document.getElementById("allResultsContainer");
     allResultsView = document.getElementById("allResultsView");
 
+    disapprovesWarning = document.getElementById("disapprovesWarning");
+    disapprovesWarning.style.display = "none";
+
     personalResultsSelect = document.getElementById("personalResultsSelect");
     personalResultsView = document.getElementById("personalResultsView");
     personalResultsView.style.display = "none";
@@ -44,24 +50,34 @@ class Person {
     constructor(id, name) {
         this.id = id;
         this.name = name;
+        this.disapproves = [];
+        
+        this.clear();
+    }
+
+    clear() {
         this.isSelected = false;
         this.selectedId = null;
         this.selectedName = null;
-        this.disapproves = [];
     }
 }
 
-function clearResults() {
+function clearOutput() {
     toggleAllResults(false);
 
     allResultsSection.style.display = 'none';
     personalResultsSection.style.display = 'none';
     personalResultsView.style.display = "none";
 
-    // Clear previous resutls
     allResultsContainer.innerHTML = "";
     personalResultsSelect.innerHTML = '<option selected value="default">Kies een persoon</option>'; // Default option
     personalResultsText.innerHTML = "[NAAM HIER]";
+    disapprovesWarning.style.display = "none";
+}
+
+function clearResults()
+{
+    persons.forEach(p => p.clear());
 }
 
 function inputChange() {
@@ -69,6 +85,7 @@ function inputChange() {
 }
 
 function updatePersonForm() {
+    clearOutput();
     clearResults();
 
     var personList = document.getElementById("personList");
@@ -96,7 +113,6 @@ function updatePersonInput() {
             }
         }
     );
-
 
     validInput = (persons.length == amountPeople);
     executeButton.disabled = !validInput;
@@ -129,20 +145,10 @@ function updatePersonInput() {
 }
 
 function execute() {
-    // Simple algorithm
-    // for (var i = 0; i < persons.length; i++) {
-    //     var options = persons.filter(function (p) {
-    //         return p.id != persons[i].id && !p.isSelected && p.selectedId != persons[i].id;
-    //     });
+    clearResults();
 
-    //     var randomIndex = Math.floor(Math.random() * options.length);
-    //     var target = options[randomIndex];
-    //     persons[i].selectedName = target.name;
-    //     persons[i].selectedId = target.id;
-    //     target.isSelected = true;
-    // }
-
-    // More complex algorithm
+    // The algorithm
+    disapprovesPossible = true;
     for (var i = 0; i < persons.length; i++) {
         var options = persons.filter(function (p) {
             return p.id != persons[i].id && !p.isSelected && p.selectedId != persons[i].id;
@@ -153,15 +159,14 @@ function execute() {
                 preferedOptions.push(p);
             }
         });
-        console.log("Prefered: " + preferedOptions.length + " Other " + options.length);
         if (preferedOptions.length > 0) {
             var randomIndex = Math.floor(Math.random() * preferedOptions.length);
             var target = preferedOptions[randomIndex];
         }
         else {
-            console.log("Unprefered!")
             var randomIndex = Math.floor(Math.random() * options.length);
             var target = options[randomIndex];
+            disapprovesPossible = false;
         }
         persons[i].selectedName = target.name;
         persons[i].selectedId = target.id;
@@ -172,11 +177,11 @@ function execute() {
 }
 
 function updateResults() {
-    clearResults();
+    clearOutput();
 
     allResultsSection.style.display = 'block';
     personalResultsSection.style.display = 'block';
-
+    disapprovesWarning.style.display = !disapprovesPossible ? "block" : "none";
     persons.forEach(person => {
         var resultElement = document.createElement("div");
         resultElement.className = "container my-3 p-4 text-left shadow rounded";
@@ -188,8 +193,6 @@ function updateResults() {
         optionElement.innerHTML = person.name;
         personalResultsSelect.appendChild(optionElement);
     });
-
-
 }
 
 function viewPersonalResult() {
