@@ -96,6 +96,7 @@ function updatePersonForm() {
     for (var i = 1; i <= amountPeople; i++) {
         var personElement = document.createElement("div");
         personElement.className = "personItem container my-3 p-4 text-left shadow rounded";
+        personElement.style.width = "400px";
         personElement.innerHTML = '<h5>Persoon ' + i + '</h5><div class="input-group mb-3"><span class="input-group-text">Naam</span><input type="text" placeholder="Voer een naam in.." class="form-control personItemName" oninput="inputChange()"></div><div class="input-group"><span class="input-group-text">Afkeur</span><select class="disapproves-select form-select" oninput="inputChange()" multiple></select></div>';
         personList.appendChild(personElement);
     }
@@ -185,6 +186,7 @@ function updateResults() {
     persons.forEach(person => {
         var resultElement = document.createElement("div");
         resultElement.className = "container my-3 p-4 text-left shadow rounded";
+        resultElement.style.width = "500px";
         resultElement.innerHTML = '<h5 class="display-6">' + person.name + '</h5><h5>' + person.selectedName + "</h5>";
         allResultsContainer.appendChild(resultElement);
 

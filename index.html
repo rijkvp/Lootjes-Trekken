@@ -17,54 +17,51 @@
 </head>
 
 <body>
-    <main class="container">
-
-        <div class="text-center p-5 m-4 shadow rounded">
+    <main>
+        <div class="text-center p-md-5 m-md-5 my-4 py-2 shadow rounded">
             <h1 class="display-2">Lootjes Trekken</h1>
-            <p class="lead">Trek eenvoudig lootjes zonder dat iemand zichzelf trekt! En zorg ervoor dat je niet dezelfde
-                mensen als vorgaande jaren trekt.</p>
+            <p class="lead">Trek eenvoudig lootjes voor sinterklaas of voor andere evenmenten!</p>
             <hr class="my-5 mx-auto w-75 text-center">
             <div class="container my-5">
-                <div class="input-group w-50 mb-5 mx-auto">
+                <div class="input-group mb-5 mx-auto px-4" style="max-width: 500px;">
                     <span class="input-group-text">Aantal mensen</span>
                     <input class="form-control" id="amountInput" type="number" min="3" value="3" name="amount">
                     <button class="btn btn-outline-primary" onclick="updatePersonForm()">Update</button>
                 </div>
-                <div id="personList" class="container w-50"></div>
+                <div id="personList" class="container d-flex flex-wrap"></div>
                 <button id="executeButton" class="btn btn-primary mt-5" onclick="execute()">Trek de lootjes</button>
-                <div id="disapprovesWarning" class="mt-3 shadow rounded p-2">
+                <div id="disapprovesWarning" class="mt-4 p-2 border border-2 border-warning rounded">
                     <h3>Ongewenste resultaten</h3>
                     <p><strong class="text-decoration-underline">Let op!</strong> Er geen mogelijkheden om voor iedereen een persoon kunnen trekken buiten de afgekeurden!
                         Zorg ervoor dat je niet teveel personen een afkeur geeft om dit te voorkomen.</p>
                 </div>
             </div>
-            <div id="personalResultsSection">
+            <div id="personalResultsSection" class="container">
                 <hr class="my-5 mx-auto w-75 text-center">
                 <h2 class="mb-3">Persoonlijke Resultaten</h2>
-                <div class="input-group w-50 mb-5 mx-auto">
+                <div class="input-group mb-5 mx-auto px-4" style="max-width: 500px;">
                     <span class="input-group-text">Persoon</span>
                     <select id="personalResultsSelect" class="form-control form-select">
                         <option selected>Kies persoon</option>
                     </select>
-                    <button class="btn btn-outline-primary" onclick="viewPersonalResult()">Bekijk</button>
+                    <button class="btn btn-outline-success" onclick="viewPersonalResult()">Bekijk</button>
                 </div>
                 <div id="personalResultsView" class="container my-5 w-50">
-                    <h3 class="display-6"><small class="text-muted">Je hebt </small><span id="personalResultsText">[NAAM
-                            HIER]</span><small class="text-muted"> getrokken!</small></h3>
-                    <p class="lead">Onthoud het goed of schijf het ergens op!</p>
-                    <button class="btn btn-primary" onclick="hidePersonalResult()">Oke, verberg dit nu</button>
+                    <h1 class="display-6"><small class="text-muted">Je hebt </small><span id="personalResultsText">[NAAM
+                            HIER]</span><small class="text-muted"> getrokken!</small></h1>
+                    <p class="lead">Onthoud het dit of schrijf het ergens op. Verberg daarna dit snel weer!</p>
+                    <button class="btn btn-primary" onclick="hidePersonalResult()">Verbergen</button>
                 </div>
             </div>
-            <div id="allResultsSection">
+            <div id="allResultsSection" class="container">
                 <hr class="my-5 mx-auto w-75 text-center">
                 <h2 class="mb-3">Alle Resultaten</h2>
-                <div id="allResultsConfirmation">
-                    <p>Als je alle resultaten bekijkt dan kan je de getrokken personen van iedereen zien! Meestal hoef
-                        je dit niet te gebruiken!</p>
+                <div id="allResultsConfirmation" class="p-2 mb-3">
+                    <p><strong class="text-decoration-underline">Let op!</strong> Als je alle resultaten bekijkt dan kan je de getrokken personen van iedereen zien! Gebruik dit alleen als dit de bedoeling is. Bij veel evenementen is het niet de bedoeling dat de deelnemners weten wie de andere deelnemers hebben getrokken.</p>
                     <button class="btn btn-danger" onclick="toggleAllResults(true)">Bekijk alle resultaten</button>
                 </div>
                 <div id="allResultsView">
-                    <div id="allResultsContainer" class="container my-5 w-50"></div>
+                    <div id="allResultsContainer" class="container d-flex flex-wrap my-4"></div>
                     <button class="btn btn-outline-secondary" onclick="toggleAllResults(false)">Verberg alle
                         resultaten</button>
                 </div>
